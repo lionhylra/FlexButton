@@ -70,7 +70,7 @@ class TableViewController: UITableViewController {
     }
     
     func configureButton(button:UIButton) {
-        button.frame = CGRectMake(5, 5, 95, 200)
+        button.frame = CGRectMake(5, 5, 200, 200)
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)
         button.layer.borderColor = UIColor.blackColor().CGColor
         button.layer.borderWidth = 1.0
