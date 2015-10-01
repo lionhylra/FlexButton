@@ -13,7 +13,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 300
-        let button1 = FlexButton(layoutStyle: .DefaultLayout)
+        let button1 = FlexButton(type: UIButtonType.Custom)
         let button2 = FlexButton(layoutStyle: .DefaultLayout)
         let button3 = FlexButton(layoutStyle: .DefaultLayout)
         configureButton(button1, button2: button2, button3: button3)
@@ -25,7 +25,8 @@ class TableViewController: UITableViewController {
         
         let button7 = FlexButton(layoutStyle: FlexButtonLayoutStyle.VerticalLayoutTitleDownImageUp)
         let button8 = FlexButton(layoutStyle: FlexButtonLayoutStyle.VerticalLayoutTitleDownImageUp)
-        let button9 = FlexButton(layoutStyle: FlexButtonLayoutStyle.VerticalLayoutTitleDownImageUp)
+        let button9 = FlexButton(type: UIButtonType.Custom)
+        button9.layoutStyle = .VerticalLayoutTitleDownImageUp
         configureButton(button7, button2: button8, button3: button9)
         
         let button10 = FlexButton(layoutStyle: FlexButtonLayoutStyle.VerticalLayoutTitleUpImageDown)
@@ -69,7 +70,7 @@ class TableViewController: UITableViewController {
     }
     
     func configureButton(button:UIButton) {
-        button.frame = CGRectMake(5, 5, 200, 200)
+        button.frame = CGRectMake(5, 5, 95, 200)
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)
         button.layer.borderColor = UIColor.blackColor().CGColor
         button.layer.borderWidth = 1.0

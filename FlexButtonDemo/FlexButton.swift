@@ -1,10 +1,27 @@
 //
-//  FlexButton.swift
-//  MyJeylabs
+//    FlexButton.swift
+//    The MIT License (MIT)
 //
-//  Created by HeYilei on 29/09/2015.
-//  Copyright © 2015 HeYilei. All rights reserved.
+//    Copyright (c) 2015 Yilei He
+//    https://github.com/lionhylra/FlexButton
 //
+//    Permission is hereby granted, free of charge, to any person obtaining a copy
+//    of this software and associated documentation files (the "Software"), to deal
+//    in the Software without restriction, including without limitation the rights
+//    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//    copies of the Software, and to permit persons to whom the Software is
+//    furnished to do so, subject to the following conditions:
+//
+//    The above copyright notice and this permission notice shall be included in all
+//    copies or substantial portions of the Software.
+//
+//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//    SOFTWARE.
 
 import UIKit
 
@@ -18,59 +35,84 @@ enum FlexButtonLayoutStyle {
 class FlexButton: UIButton {
 
     var layoutStyle:FlexButtonLayoutStyle = .DefaultLayout
+    private var boundsCenter: CGPoint {
+        return CGPoint(x: self.bounds.origin.x + self.bounds.size.width/2,
+                       y: self.bounds.origin.y + self.bounds.size.height/2)
+    }
     
-    convenience init(layoutStyle style:FlexButtonLayoutStyle){
-        self.init()
+    override convenience init(frame: CGRect){
+        self.init(layoutStyle:.DefaultLayout)
+    }
+    
+    
+    init(layoutStyle style:FlexButtonLayoutStyle){
         self.layoutStyle = style
+        super.init(frame: CGRectZero)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        guard let imageView = self.imageView, label = self.titleLabel else { return }
+
         switch layoutStyle {
         case .DefaultLayout:
             return
         case .HorizonLayoutTitleLeftImageRight:
-            let labelWidth = self.titleLabel?.frame.size.width
-            let imageViewWidth = self.imageView?.frame.size.width
-            let totalWidth = (labelWidth ?? 0) + (imageViewWidth ?? 0)
-            if let label = self.titleLabel {
-                label.frame.origin.x = self.center.x - totalWidth/2
-            }
-            if let imageView = self.imageView {
-                guard let label = self.titleLabel else {return}
-                imageView.frame.origin.x = label.frame.origin.x + label.frame.width
-            }
+            
+            let totalWidth = label.frame.width + imageView.frame.width
+            
+            label.frame.origin.x = self.boundsCenter.x - totalWidth/2
+            imageView.frame.origin.x = label.frame.origin.x + label.frame.width
+            
         case .VerticalLayoutTitleDownImageUp:
-            let labelHeight = self.titleLabel?.frame.height
-            let imageViewHeight = self.imageView?.frame.height
-            let totalHeight = (labelHeight ?? 0) + (imageViewHeight ?? 0)
-            if let imageView = self.imageView {
-                imageView.frame.origin.y = self.center.y - totalHeight/2
-                imageView.center.x = self.center.x
-            }
             
-            if let label = self.titleLabel {
-                guard let imageView = self.imageView else {return}
-                label.frame.origin.y = imageView.frame.origin.y + imageView.frame.height
-                label.center.x = self.center.x
-            }
+            adjustSubviewSizeForVerticalLayoutStyle(label: label, imageView: imageView)
+            
+            let totalHeight = label.frame.height + imageView.frame.height
+            
+            /* adjust position */
+            imageView.frame.origin.y = self.boundsCenter.y - totalHeight/2
+            imageView.center.x = self.boundsCenter.x
+            
+            /* adjust position */
+            label.frame.origin.y = imageView.frame.origin.y + imageView.frame.height
+            label.center.x = self.boundsCenter.x
+            
         case .VerticalLayoutTitleUpImageDown:
-            let labelHeight = self.titleLabel?.frame.height
-            let imageViewHeight = self.imageView?.frame.height
-            let totalHeight = (labelHeight ?? 0) + (imageViewHeight ?? 0)
-            if let label = self.titleLabel {
-                label.frame.origin.y = self.center.y - totalHeight/2
-                label.center.x = self.center.x
-            }
             
-            if let imageView = self.imageView {
-                guard let label = self.titleLabel else {return}
-                imageView.frame.origin.y = label.frame.origin.y + label.frame.height
-                imageView.center.x = self.center.x
-            }
+            adjustSubviewSizeForVerticalLayoutStyle(label: label, imageView: imageView)
+            let totalHeight = label.frame.height + imageView.frame.height
+            
+            /*  adjust position */
+            label.frame.origin.y = self.boundsCenter.y - totalHeight/2
+            label.center.x = self.boundsCenter.x
+            
+            /* adjust position */
+            imageView.frame.origin.y = label.frame.origin.y + label.frame.height
+            imageView.center.x = self.boundsCenter.x
         }
         
     }
 
+    private func adjustSubviewSizeForVerticalLayoutStyle(label label: UILabel, imageView: UIImageView) {
+        /* adjust label  size */
+        label.sizeToFit()
+        if label.frame.size.width > self.bounds.size.width {
+            label.frame.size.width = self.bounds.size.width
+        }
+        
+        /* adjust imageView size */
+        if imageView.frame.size.height > self.bounds.size.height - label.frame.size.height {
+            imageView.frame.size.height = self.bounds.size.height - label.frame.size.height
+        }
+        if imageView.frame.size.width > self.bounds.size.width {
+            imageView.frame.size.width = self.bounds.size.width
+        }
+
+    }
 }
