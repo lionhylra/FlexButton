@@ -19,6 +19,7 @@ FlexButton is a subclass of UIButton on which you can customize the layout style
 	![Alt VerticalLayoutTitleDownImageUp](https://github.com/lionhylra/FlexButton/blob/master/VerticalLayoutTitleDownImageUp.jpg?raw=true)
 4.	VerticalLayoutTitleUpImageDown
 	![Alt VerticalLayoutTitleUpImageDown](https://github.com/lionhylra/FlexButton/blob/master/VerticalLayoutTitleUpImageDown.jpg?raw=true)
+	
 # How to use
 
 Use designated initializer:
