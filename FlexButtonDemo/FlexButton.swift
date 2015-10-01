@@ -41,13 +41,13 @@ class FlexButton: UIButton {
     }
     
     override convenience init(frame: CGRect){
-        self.init(layoutStyle:.DefaultLayout)
+        self.init(layoutStyle:.DefaultLayout, frame: frame)
     }
     
     
-    init(layoutStyle style:FlexButtonLayoutStyle){
+    init(layoutStyle style:FlexButtonLayoutStyle, frame: CGRect = CGRectZero){
         self.layoutStyle = style
-        super.init(frame: CGRectZero)
+        super.init(frame: frame)
     }
 
     required init?(coder aDecoder: NSCoder) {
