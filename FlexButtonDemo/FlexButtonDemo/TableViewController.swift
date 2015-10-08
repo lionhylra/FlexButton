@@ -13,7 +13,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 300
-        let button1 = FlexButton(type: UIButtonType.Custom)
+        let button1 = FlexButton(type: UIButtonType.Custom)//same as FlexButton(layoutStyle: .DefaultLayout)
         let button2 = FlexButton(layoutStyle: .DefaultLayout)
         let button3 = FlexButton(layoutStyle: .DefaultLayout)
         configureButton(button1, button2: button2, button3: button3)

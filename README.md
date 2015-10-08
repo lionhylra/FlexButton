@@ -32,3 +32,9 @@ Or use UIButton's convenience initializer:
 let button = FlexButton(type: UIButtonType.Custom)
 button.layoutStyle = .VerticalLayoutTitleDownImageUp
 ```
+
+Then
+```swift
+button.setTitle("Button Title", forState: .Normal)
+button.setImage(UIImage(named: "image"), forState: .Normal)
+```
