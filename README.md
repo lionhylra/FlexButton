@@ -11,13 +11,13 @@ FlexButton is a subclass of UIButton on which you can customize the layout style
 
 ### Layout styles
 
-1.	DefaultLayout
+1.	DefaultLayout  
 	Same as UIButton, nothing different.
-2.	HorizonLayoutTitleLeftImageRight
+2.	HorizonLayoutTitleLeftImageRight  
 	![Alt HorizonLayoutTitleLeftImageRight](https://github.com/lionhylra/FlexButton/blob/master/HorizonLayoutTitleLeftImageRight.jpg?raw=true)
-3.	VerticalLayoutTitleDownImageUp
+3.	VerticalLayoutTitleDownImageUp  
 	![Alt VerticalLayoutTitleDownImageUp](https://github.com/lionhylra/FlexButton/blob/master/VerticalLayoutTitleDownImageUp.jpg?raw=true)
-4.	VerticalLayoutTitleUpImageDown
+4.	VerticalLayoutTitleUpImageDown  
 	![Alt VerticalLayoutTitleUpImageDown](https://github.com/lionhylra/FlexButton/blob/master/VerticalLayoutTitleUpImageDown.jpg?raw=true)
 	
 # How to use
